@@ -1,8 +1,11 @@
 package com.example.alertdialoguebox
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.app.Dialog
+import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -10,13 +13,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.text.SimpleDateFormat
 
 var totalValue: Int = 0//public variable declaration
 
 class MainActivity : AppCompatActivity() {
     private var displayTextView: TextView? = null
     private var openDialogButton: Button? = null
-
+    private var open: Button? = null
+    //lateinit var simpleDateFormat:SimpleDateFormat(dd/MMM/yyyy),Local.getDefault())
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,5 +73,44 @@ class MainActivity : AppCompatActivity() {
 
             dialog.show()
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        open = findViewById(R.id.button)
+        open?.setOnClickListener {
+            DatePickerDialog(this,
+                {
+                    _,year,month,dateofmonth->
+                    val calendar=Calendar.getInstance()
+                    calendar.set(year,month,dateofmonth)
+                    open?.setText(calendar.time.toString())
+                },
+                Calendar.getInstance().get(Calendar.YEAR) ,
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DATE),).show()
+
+
+
+        }
+
+
+
+
+
+
+
+
     }
+
+
 }
